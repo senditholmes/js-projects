@@ -14,11 +14,9 @@ function handleButtonPress(userInput) {
 function handleNumberPress(number) {
   if (currentScreen === "0") {
     reRender(number);
-  } else if ((currentScreen != "0") & (runningTotal === null)) {
+  } else if (currentScreen != "0") {
     concatNewNumber = currentScreen + number;
     reRender(concatNewNumber);
-  } else {
-    reRender(number);
   }
 }
 
@@ -33,7 +31,6 @@ function handleSymbolPress(symbol) {
       if (currentScreen.length === 1) {
         reRender("0");
       } else {
-        operationInProgress = true;
         newScreenValue = currentScreen.substring(0, currentScreen.length - 1);
         reRender(newScreenValue);
       }
@@ -42,16 +39,15 @@ function handleSymbolPress(symbol) {
     case "+":
       if (runningTotal === null) {
         runningTotal = parseInt(currentScreen);
-        reRender(currentScreen);
       } else {
         runningTotal += parseInt(currentScreen);
       }
+      reRender("0");
       break;
 
     case "=":
       finalResult = parseInt(currentScreen) + runningTotal;
       reRender(finalResult.toString());
-      operationInProgress = false;
       break;
 
     default:
