@@ -1,5 +1,7 @@
 let currentScreen = "0";
 let runningTotal = null;
+let previousOperation = null;
+let finalResult = null;
 
 function handleButtonPress(userInput) {
   if (isNaN(parseInt(userInput)) === false) {
@@ -37,22 +39,51 @@ function handleSymbolPress(symbol) {
       break;
 
     case "+":
-      if (runningTotal === null) {
-        runningTotal = parseInt(currentScreen);
-      } else {
-        runningTotal += parseInt(currentScreen);
-      }
-      reRender("0");
+    case "-":
+    case "×":
+    case "÷":
+      handleOperation(symbol);
       break;
 
     case "=":
-      finalResult = parseInt(currentScreen) + runningTotal;
+      if (previousOperation === null) {
+        break;
+      } else if (previousOperation === "+") {
+        finalResult = runningTotal += parseInt(currentScreen);
+      } else if (previousOperation === "-") {
+        finalResult = runningTotal -= parseInt(currentScreen);
+      } else if (previousOperation === "×") {
+        finalResult = runningTotal *= parseInt(currentScreen);
+      } else if (previousOperation === "÷") {
+        finalResult = runningTotal /= parseInt(currentScreen);
+      }
       reRender(finalResult.toString());
+
+      previousOperation = null;
+      runningTotal = null;
+      finalResult = null;
       break;
 
     default:
       console.log("no conditions met");
   }
+}
+
+function handleOperation(symbol) {
+  if (runningTotal === null) {
+    runningTotal = parseInt(currentScreen);
+  } else if (symbol === "+") {
+    runningTotal += parseInt(currentScreen);
+  } else if (symbol === "-") {
+    runningTotal -= parseInt(currentScreen);
+  } else if (symbol === "÷") {
+    runningTotal /= parseInt(currentScreen);
+  } else if (symbol === "x") {
+    runningTotal *= parseInt(currentScreen);
+  }
+  previousOperation = symbol;
+  console.log(previousOperation);
+  reRender("0");
 }
 
 function reRender(newScreenValue) {
