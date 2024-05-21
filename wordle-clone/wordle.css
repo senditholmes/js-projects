@@ -8,3 +8,8 @@
 .guess-row {
   margin-bottom: 10px;
 }
+
+.word-of-the-day-container {
+  display: flex;
+  justify-content: center;
+}

@@ -11,68 +11,19 @@
       <h1>Wordle</h1>
       <h2>Good luck!</h2>
 
-      <form name="guess-1">
-        <div class="guess-row">
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-        </div>
-      </form>
-
-      <form name="guess-2">
-        <div class="guess-row">
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-        </div>
-      </form>
-
-      <form name="guess-3">
-        <div class="guess-row">
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-        </div>
-      </form>
-
-      <form name="guess-4">
-        <div class="guess-row">
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-        </div>
-      </form>
-
-      <form name="guess-5">
-        <div class="guess-row">
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-        </div>
-      </form>
-
-      <form name="guess-6">
-        <div class="guess-row">
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-          <input type="text" maxlength="1" />
-        </div>
-      </form>
+      <div class="guess-row">
+        <input type="text" maxlength="1" id="row1letter1" placeholder="" />
+        <input type="text" maxlength="1" id="row1letter2" placeholder="" />
+        <input type="text" maxlength="1" id="row1letter3" placeholder="" />
+        <input type="text" maxlength="1" id="row1letter4" placeholder="" />
+        <input type="text" maxlength="1" id="row1letter5" placeholder="" />
+        <button type="button" class="guess-button">Guess...</button>
+      </div>
 
       <div class="guess-result"></div>
     </div>
+
+    <div class="word-of-the-day-container"></div>
   </body>
 
   <script src="./wordle.js"></script>
