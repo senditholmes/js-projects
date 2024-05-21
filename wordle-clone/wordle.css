@@ -13,3 +13,26 @@
   display: flex;
   justify-content: center;
 }
+
+.guess-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  border-style: solid;
+  border-color: black;
+
+  height: 100px;
+}
+
+.letter {
+  padding: 2px;
+  height: 90px;
+  width: 90px;
+
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+
+  font-size: x-large;
+}

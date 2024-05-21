@@ -11,13 +11,47 @@
       <h1>Wordle</h1>
       <h2>Good luck!</h2>
 
-      <div class="guess-row">
-        <input type="text" maxlength="1" id="row1letter1" placeholder="" />
-        <input type="text" maxlength="1" id="row1letter2" placeholder="" />
-        <input type="text" maxlength="1" id="row1letter3" placeholder="" />
-        <input type="text" maxlength="1" id="row1letter4" placeholder="" />
-        <input type="text" maxlength="1" id="row1letter5" placeholder="" />
-        <button type="button" class="guess-button">Guess...</button>
+      <div class="guess-row" id="r1">
+        <div class="letter" id="r1l1" contenteditable="true"></div>
+        <div class="letter" id="r1l2" contenteditable="true"></div>
+        <div class="letter" id="r1l3" contenteditable="true"></div>
+        <div class="letter" id="r1l4" contenteditable="true"></div>
+        <div class="letter" id="r1l5" contenteditable="true"></div>
+      </div>
+      <div class="guess-row" id="r2">
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+      </div>
+      <div class="guess-row" id="r3">
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+      </div>
+      <div class="guess-row" id="r4">
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+      </div>
+      <div class="guess-row" id="r5">
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+      </div>
+      <div class="guess-row" id="r6">
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
+        <div class="letter" contenteditable="false"></div>
       </div>
 
       <div class="guess-result"></div>
