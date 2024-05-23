@@ -85,6 +85,7 @@ async function handleValidate(guessJSON) {
 function compareWord(wordOfTheDay, currentGuess) {
   if (wordOfTheDay === currentGuess) {
     alert("YOU WON!");
+    currentRow.style.backgroundColor = "green";
   } else {
     // split both words into arrays, and compare one by one
     const wordSplit = wordOfTheDay.split("");
@@ -94,16 +95,23 @@ function compareWord(wordOfTheDay, currentGuess) {
 
     for (let i = 0; i < wordSplit.length; i++) {
       if (wordSplit[i] === guessSplit[i]) {
-        // apply green style
-        // remove from array
+        const correctLetter = document.querySelector(
+          `#r${currentGuessNumber}l${i + 1}`
+        );
 
-        // start j loop
+        console.log(correctLetter);
+
+        correctLetter.style.backgroundColor = "green";
+        guessSplit[i] = "";
+
+        // start j loop // remove from array // apply green style
         // compare remaining to see if they are in the guess
         // if included style yellow
 
         // remaining elements are styled gray
 
         console.log("letter in the correct place found!");
+        console.log(`${guessSplit[i]}`);
       }
     }
   }
