@@ -1,24 +1,39 @@
 // GLOBALS
-const currentGuessNumber = "1";
+let currentGuessNumber = "1";
 const max = 1;
 let wordOfTheDay;
 let puzzleNumber;
 
-// ELEMENTS
-const currentRow = document.querySelector(`#r${currentGuessNumber}`);
-currentRow.addEventListener("keydown", handleInput);
+// INIT CONTAINERS FOR DATA DISPLAY
 const wordOfTheDayContainer = document.querySelector(
   ".word-of-the-day-container"
 );
-const firstBox = document.querySelector("#r1l1");
-firstBox.focus();
 
-// HELPERS
-function isLetter(letter) {
-  return /^[a-zA-Z]$/.test(letter);
+// SET CURRENT ROW AND ADD LISTENERS
+let currentRow = document.querySelector(`#r${currentGuessNumber}`);
+currentRow.addEventListener("keydown", handleInput);
+
+// INIT FOCUS AND ATTRIBUTES
+let unDisabledBoxes = currentRow.querySelectorAll("input");
+unDisabledBoxes.forEach((box) => {
+  box.removeAttribute("disabled");
+});
+let initBox = document.querySelector(`#r${currentGuessNumber}l1`);
+initBox.focus();
+
+// FETCH
+getWordOfTheDay();
+async function getWordOfTheDay() {
+  const res = await fetch("https://words.dev-apis.com/word-of-the-day");
+  const data = await res.json();
+
+  wordOfTheDay = data.word;
+  puzzleNumber = data.puzzleNumber;
+
+  wordOfTheDayContainer.innerText = `Today's word: ${wordOfTheDay}. Puzzle Number: ${puzzleNumber}`;
 }
 
-// EVENT LISTENER
+// MAIN GAME BODY FLOW
 function handleInput(event) {
   if (
     isLetter(event.key) ||
@@ -89,42 +104,48 @@ function compareWord(wordOfTheDay, currentGuess) {
   } else {
     // split both words into arrays, and compare one by one
     const wordSplit = wordOfTheDay.split("");
-    console.log(wordSplit);
     const guessSplit = currentGuess.split("");
-    console.log(guessSplit);
 
+    // check if the letters include
     for (let i = 0; i < wordSplit.length; i++) {
-      if (wordSplit[i] === guessSplit[i]) {
-        const correctLetter = document.querySelector(
-          `#r${currentGuessNumber}l${i + 1}`
+      if (guessSplit.includes(wordSplit[i])) {
+        // find index of included letter
+        let index = guessSplit.indexOf(wordSplit[i]);
+        let includedLetter = document.querySelector(
+          `#r${currentGuessNumber}l${index + 1}`
         );
+        includedLetter.style.backgroundColor = "yellow";
+      }
+    }
 
-        console.log(correctLetter);
-
-        correctLetter.style.backgroundColor = "green";
-        guessSplit[i] = "";
-
-        // start j loop // remove from array // apply green style
-        // compare remaining to see if they are in the guess
-        // if included style yellow
-
-        // remaining elements are styled gray
-
-        console.log("letter in the correct place found!");
-        console.log(`${guessSplit[i]}`);
+    for (let j = 0; j < wordSplit.length; j++) {
+      if (wordSplit[j] === guessSplit[j]) {
+        let exactLetter = document.querySelector(
+          `#r${currentGuessNumber}l${j + 1}`
+        );
+        exactLetter.style.backgroundColor = "green";
       }
     }
   }
+
+  handleNextGuess();
 }
 
-async function getWordOfTheDay() {
-  const res = await fetch("https://words.dev-apis.com/word-of-the-day");
-  const data = await res.json();
+function handleNextGuess() {
+  let newGuessNumberAsInt = parseInt(currentGuessNumber) + 1;
+  currentGuessNumber = newGuessNumberAsInt.toString();
+  let currentBox = document.querySelector(`#r${currentGuessNumber}l1`);
+  currentRow = document.querySelector(`#r${currentGuessNumber}`);
 
-  wordOfTheDay = data.word;
-  puzzleNumber = data.puzzleNumber;
-
-  wordOfTheDayContainer.innerText = `Today's word: ${wordOfTheDay}. Puzzle Number: ${puzzleNumber}`;
+  unDisabledBoxes = currentRow.querySelectorAll("input");
+  unDisabledBoxes.forEach((box) => {
+    box.removeAttribute("disabled");
+  });
+  currentRow.addEventListener("keydown", handleInput);
+  currentBox.focus();
 }
 
-getWordOfTheDay();
+// HELPERS
+function isLetter(letter) {
+  return /^[a-zA-Z]$/.test(letter);
+}
