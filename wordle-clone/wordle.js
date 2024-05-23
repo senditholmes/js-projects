@@ -64,9 +64,6 @@ function handleInput(event) {
       event.target.nextElementSibling.focus();
     }
   });
-
-  // if the current event input = 1
-  // AND previous keypress was NOT backspace, auto next focus
 }
 
 async function handleValidate(guessJSON) {
@@ -89,7 +86,26 @@ function compareWord(wordOfTheDay, currentGuess) {
   if (wordOfTheDay === currentGuess) {
     alert("YOU WON!");
   } else {
-    alert("WRONG GUESS");
+    // split both words into arrays, and compare one by one
+    const wordSplit = wordOfTheDay.split("");
+    console.log(wordSplit);
+    const guessSplit = currentGuess.split("");
+    console.log(guessSplit);
+
+    for (let i = 0; i < wordSplit.length; i++) {
+      if (wordSplit[i] === guessSplit[i]) {
+        // apply green style
+        // remove from array
+
+        // start j loop
+        // compare remaining to see if they are in the guess
+        // if included style yellow
+
+        // remaining elements are styled gray
+
+        console.log("letter in the correct place found!");
+      }
+    }
   }
 }
 
