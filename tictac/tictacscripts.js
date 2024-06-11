@@ -33,10 +33,8 @@ function handleUserTurn(e) {
   // else enter correct symbol
   if (turnAlternator) {
     clickedSquare.innerText = playerOne.symbol;
-    previousGuess = playerOne.symbol;
   } else if (!turnAlternator) {
     clickedSquare.innerText = playerTwo.symbol;
-    previousGuess = playerTwo.symbol;
   }
 
   // get the index of the clicked square 1-9
@@ -53,55 +51,45 @@ function handleUserTurn(e) {
 }
 
 function updateBoard(row, column, diag) {
-  console.log(diag);
+  let playerToIncrease;
+
   if (turnAlternator) {
-    // update playerOne's arrays
-    if (diag != NaN) {
-      if (diag != 2) {
-        playerOne.diags[diag]++;
-      } else if (diag === 2) {
-        playerOne.diags[0]++;
-        playerOne.diags[1]++;
-
-        if (playerOne.diags[0] === 3 || playerOne.diags[1] === 3) {
-          console.log("GAME WON WITH DIAGS");
-        }
+    playerToIncrease = playerOne;
+  } else {
+    playerToIncrease = playerTwo;
+  }
+  // update player's arrays
+  if (diag != NaN) {
+    if (diag != 2) {
+      playerToIncrease.diags[diag]++;
+      if (playerToIncrease.diags[diag] === 3) {
+        console.log("GAME WON WITH DIAGS");
+        return;
       }
-    } //end of diag
-    playerOne.rows[row]++;
-    if (playerOne.rows[row] === 3) {
-      console.log("GAME WON WITH ROWS");
-      return;
-    }
-    playerOne.columns[column]++;
-    if (playerOne.columns[column] === 3) {
-      console.log("GAME WON WITH COLUMNS");
-      return;
-    }
-  } else if (!turnAlternator) {
-    //update playerTwo's arrays
-    if (diag != NaN) {
-      if (diag != 3) {
-        playerTwo.diags[diag]++;
-      } else if (diag === 2) {
-        playerTwo.diags[0]++;
-        playerTwo.diags[1]++;
+      // need to update both diag arrays
+    } else if (diag === 2) {
+      playerToIncrease.diags[0]++;
+      playerToIncrease.diags[1]++;
 
-        if (playerOne.diags[0] === 3 || playerOne.diags[1] === 3) {
-          console.log("GAME WON WITH DIAGS");
-        }
+      if (playerToIncrease.diags[0] === 3 || playerToIncrease.diags[1] === 3) {
+        console.log("GAME WON WITH DIAGS");
+        return;
       }
     }
-    playerTwo.rows[row]++;
-    if (playerOne.rows[row] === 3) {
-      console.log("GAME WON WITH ROWS");
-      return;
-    }
-    playerTwo.columns[column]++;
-    if (playerOne.columns[column] === 3) {
-      console.log("GAME WON WITH COLUMNS");
-      return;
-    }
+  } //end of diag
+
+  // update row input and check for win
+  playerToIncrease.rows[row]++;
+  if (playerToIncrease.rows[row] === 3) {
+    console.log("GAME WON WITH ROWS");
+    return;
+  }
+
+  // update column input and check for win
+  playerToIncrease.columns[column]++;
+  if (playerToIncrease.columns[column] === 3) {
+    console.log("GAME WON WITH COLUMNS");
+    return;
   }
   turnAlternator = !turnAlternator;
   console.log("nobody won");
